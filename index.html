@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./1.png" />
+    <title>고통스러운 다이어트의 길</title>
+    <style>
+      .inputForm {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 100%;
+        top: 50%;
+        align-items: center;
+        transition: 1s ease;
+      }
+      .inputForm > div > input {
+        width: 50px;
+        height: 35px;
+        margin-bottom: 0.65rem;
+        text-align: center;
+      }
+      .wrap {
+        height: 100vh;
+      }
+      .inputForm > div {
+        line-height: 35px;
+      }
+      .inputForm > div:nth-child(3) > input {
+        width: 18px;
+        height: 18px;
+      }
+      .result {
+        margin-top: 2rem;
+        font-size: 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <form class="inputForm">
+        <div>
+          현재 몸무게는 <input class="now" type="number" placeholder="60" />
+          kg
+        </div>
+        <div>
+          목표 몸무게는 <input class="goal" type="number" placeholder="60" />
+          kg
+        </div>
+        <div>시크릿 모드<input type="checkbox" class="check" /></div>
+        <button hidden></button>
+        <div class="result"></div>
+      </form>
+    </div>
+
+    <script>
+      const inputForm = document.querySelector(".inputForm"),
+        nowWeight = document.querySelector(".now"),
+        goalWeight = document.querySelector(".goal"),
+        result = document.querySelector(".result");
+      const checkbox = document.querySelector(".check");
+      function calc(e) {
+        e.preventDefault();
+        inputForm.style.top = "30%";
+        const before = parseInt(nowWeight.value);
+        const after = parseInt(goalWeight.value);
+        if (checkbox.checked === false) {
+          if (before > after) {
+            const calcResult = (before - after) * 7800;
+            result.innerHTML = `목표 몸무게는 ${after}kg입니다. <br> 소비해야될 칼로리는 약 ${calcResult}Kcal 입니다.<br><div
+        style="
+          font-size: 16px;
+          font-weight: 100;
+        "
+      >밥 ${Math.floor(calcResult / 300)}공기 <br>
+      허니콤보 ${Math.floor(calcResult / 1754)}마리<br> 
+      맥주 500ml ${Math.floor(calcResult / 235)}잔 <br>
+      소고기 ${Math.floor(calcResult / 240)}근 <br>
+      맛있는 굴전 100g ${Math.floor(
+        calcResult / 222
+      )}인분  </div> <br> 앞으로 ${Math.abs(after - before)}kg 남았습니다...`;
+          } else {
+            const calcResult = (after - before) * 7800;
+            result.innerHTML = `목표 몸무게는 ${after}kg입니다. <br> 섭취해야할 칼로리는 약 ${calcResult}Kcal 입니다.<br><div
+        style="
+          font-size: 16px;
+          font-weight: 100;
+        "
+      >밥 ${Math.floor(calcResult / 300)}공기 <br>
+      허니콤보 ${Math.floor(calcResult / 1754)}마리<br> 
+      맥주 500ml ${Math.floor(calcResult / 235)}잔 <br>
+      소고기 ${Math.floor(calcResult / 240)}근 <br>
+      맛있는 굴전 100g ${Math.floor(
+        calcResult / 222
+      )}인분  </div> <br> 앞으로 ${after - before}kg 남았습니다... `;
+          }
+        } else {
+          nowWeight.style.color = "#fff";
+          nowWeight.style.border = "none";
+          nowWeight.disabled = true;
+
+          if (before > after) {
+            const calcResult = (before - after) * 7800;
+            result.innerHTML = `목표 몸무게는${after}kg입니다. <br> 소비해야될 칼로리는 약 ${calcResult}Kcal 입니다.<br><div
+        style="
+          font-size: 16px;
+          font-weight: 100;
+        "
+      >밥 ${Math.floor(calcResult / 300)}공기 <br>
+      허니콤보 ${Math.floor(calcResult / 1754)}마리<br> 
+      맥주 500ml ${Math.floor(calcResult / 235)}잔 <br>
+      소고기 ${Math.floor(calcResult / 240)}근 <br>
+      맛있는 굴전 100g ${Math.floor(calcResult / 222)}인분  </div>`;
+          } else {
+            const calcResult = (after - before) * 7800;
+            result.innerHTML = `목표 몸무게는 ${after}kg입니다. <br> 섭취해야할 칼로리는 약 ${calcResult}Kcal 입니다.<br><div
+        style="
+          font-size: 16px;
+          font-weight: 100;
+        "
+      >밥 ${Math.floor(calcResult / 300)}공기 <br>
+      허니콤보 ${Math.floor(calcResult / 1754)}마리<br> 
+      맥주 500ml ${Math.floor(calcResult / 235)}잔 <br>
+      소고기 ${Math.floor(calcResult / 240)}근 <br>
+      맛있는 굴전 100g ${Math.floor(calcResult / 222)}인분  </div>`;
+          }
+        }
+      }
+      inputForm.addEventListener("submit", calc);
+    </script>
+  </body>
+</html>
